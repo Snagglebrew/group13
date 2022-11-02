@@ -11,17 +11,22 @@ class Invoice:
 
     def totalImpurePrice(self, products):
         total_impure_price = 0
-        ## Complete the missing part of this fuction here
+        for product in products:
+            total_impure_price += products[product]['qnt'] * products[product]['unit_price']
         return total_impure_price
+
 
     def totalDiscount(self, products):
         total_discount = 0
         ## Complete the missing part of this fuction here
+        for product in products:
+            total_discount += products[product]['qnt'] * products[product]['unit_price'] * products[product]['discount'] / 100
         self.total_discount = total_discount
         return total_discount
 
     def totalPurePrice(self, products):
         total_pure_price = 0
+        total_pure_price = self.totalImpurePrice(products) - self.totalDiscount(products)
         ## Complete the missing part of this fuction here
         return total_pure_price
 
