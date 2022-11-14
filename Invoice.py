@@ -13,7 +13,7 @@ class Invoice:
         total_impure_price = 0
         for product in products:
             total_impure_price += products[product]['qnt'] * products[product]['unit_price']
-        return total_impure_price
+        return round(total_impure_price,2)
 
 
     def totalDiscount(self, products):
@@ -21,12 +21,17 @@ class Invoice:
         for product in products:
             total_discount += products[product]['qnt'] * products[product]['unit_price'] * products[product]['discount'] / 100
         self.total_discount = total_discount
-        return total_discount
+        return round(total_discount,2)
 
     def totalPurePrice(self, products):
         total_pure_price = 0
         total_pure_price = self.totalImpurePrice(products) - self.totalDiscount(products)
-        return total_pure_price
+        return round(total_pure_price,2)
+    
+    def totalTax(self, products):
+        total_tax = 0
+        total_tax = self.totalPurePrice(products) * 0.07
+        return round(total_tax,2)
 
     def inputAnswer(self, input_value):
         while True:
